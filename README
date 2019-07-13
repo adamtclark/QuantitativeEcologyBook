@@ -1,4 +1,4 @@
-These exercises are meant to be paired with the "Quantitative Ecology: A New Unified" ebook, by Clarence Lehman, Shelby Loberg, and Adam Clark. The exercises are grouped by chapter, along with some reviews of various mathematical methods that may come in handy.
+These exercises are meant to be paired with the "Quantitative Ecology: A New Unified Approach" ebook, by Clarence Lehman, Shelby Loberg, and Adam Clark. The exercises are grouped by chapter, along with some reviews of various mathematical methods that may come in handy.
 
 The repository includes four folders - "pdf" includes PDFs' of questions and solutions, and is probably the best place to start. The "review" folder includes material that might be helpful for understanding some of the concepts raised in the textbook, such as linearized stability analysis. The .tex code used to make the pdf's is available in the "tex" folder. Finally, the "templates" folder includes some source files that you might need to compile the .tex code properly.
 
