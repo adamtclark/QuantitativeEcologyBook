@@ -1,0 +1,45 @@
+%  SWITCH TO 6-POINT TYPE
+%
+\font\sixit   = cmti6%
+\font\sixsl   = cmsl6%
+\font\sixtt   = cmtt8 at 6pt%
+\font\sixbf   = cmbx8 at 6pt%
+%
+\font\sixrm   = cmr6%
+\font\sixi    = cmmi10 at 6pt%
+\font\sixsy   = cmsy10 at 6pt%
+\font\sixx    = cmex10 at 6pt%
+%
+\font\fiverm  = cmr5%
+\font\fivei   = cmmi10 at 5pt%
+\font\fivesy  = cmsy10 at 5pt%
+\font\fivex   = cmex10 at 5pt%
+\font\fivebf  = cmbx10 at 5pt%
+%
+\font\fourrm  = cmr5   at 4.5pt%    For \scriptstyle
+\font\fouri   = cmmi10 at 4.5pt%
+\font\foursy  = cmsy10 at 4.5pt%
+\font\fourx   = cmex10 at 4.5pt%
+\font\fourbf  = cmbx10 at 4.5pt%
+%
+\font\threerm = cmr5   at 3.0pt%    For \scriptscriptstyle
+\font\threei  = cmmi10 at 3.0pt%
+\font\threesy = cmsy10 at 3.0pt%
+\font\threex  = cmex10 at 3.0pt%
+\font\threebf = cmbx10 at 3.0pt%
+%
+\def\sixpoint{\def\rm{\fam0\sixrm}%
+\font\sixsc=cmcsc10 at 6pt%
+\textfont0=\sixrm \scriptfont0=\fourrm \scriptscriptfont0=\threerm%
+\textfont1=\sixi  \scriptfont1=\fouri  \scriptscriptfont1=\threei%
+\textfont2=\sixsy \scriptfont2=\foursy \scriptscriptfont2=\threesy%
+%\textfont3=\sixex \scriptfont3=\fourex \scriptscriptfont3=\threex%
+\textfont\itfam=\sixit \def\it{\fam\itfam\sixit}%
+\textfont\slfam=\sixsl \def\sl{\fam\slfam\sixsl}%
+\textfont\ttfam=\sixtt \def\tt{\fam\ttfam\sixtt}%
+\textfont\bffam=\sixbf \scriptfont\bffam=\fourbf%
+\scriptscriptfont\bffam=\threebf \def\bf{\fam\bffam\sixbf}%
+\normalbaselineskip=7.2pt%
+\setbox\strutbox=\hbox{\vrule height5.1pt depth2.1pt width0pt}%
+\let\sc=\sixsc%
+\normalbaselines\rm}%

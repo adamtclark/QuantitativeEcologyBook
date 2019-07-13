@@ -1,0 +1,63 @@
+\title{Chapter 3 Practice Questions}
+
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+
+\begin{document}
+\date{}
+\maketitle
+In the text, we presented the following example to simulate the growth of a population that doubles in size every hour:
+
+\begin{verbatim}
+N=1; t=0;
+while(t<=5*24) { print(N); N=N*2; t=t+1; }
+\end{verbatim}
+
+\noindent{\textit{Question 3.1:}}
+\newline
+How would we update this code to simulate growth of a population that triples in size every hour?
+\newline
+
+\noindent{\textit{Question 3.2:}}
+\newline
+How would we update this code to simulate growth of a population that doubles only every ten hours?
+\newline
+
+\noindent{\textit{Question 3.3:}}
+\newline
+How would we update this code to show us how large the population will be after three days of growth?
+
+\pagebreak
+\noindent{\textbf{Answers:}}
+
+~\newline
+\textit{Question 3.1:}
+\newline
+Instead of multiplying \verb!N! by 2 every time-step, we would instead multiply it by 3, yielding:
+
+\begin{verbatim}
+N=1; t=0;
+while(t<=5*24) { print(N); N=N*3; t=t+1; }
+\end{verbatim}
+
+~\\~\newline
+\textit{Question 3.2:}
+\newline
+Instead of moving forward in time-steps of one hour (i.e. \verb!t=t+1!), we would use time-steps of ten hours, yielding:
+
+\begin{verbatim}
+N=1; t=0;
+while(t<=5*24) { print(N); N=N*2; t=t+10; }
+\end{verbatim}
+
+~\\~\newline
+\textit{Question 3.3:}
+\newline
+In order to simulate only 3 days of growth, rather than 5, we would update the total number of iterations in \verb!t<5*24! to \verb!t<3*24!, yielding:
+
+\begin{verbatim}
+N=1; t=0;
+while(t<=3*24) { print(N); N=N*2; t=t+1; }
+\end{verbatim}
+
+\end{document}

@@ -1,0 +1,173 @@
+\title{Math Review}
+
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+
+\begin{document}
+\date{}
+\maketitle
+
+\subsection{For the examples on this sheet, assume that:}
+\begin{enumerate}
+\item{} $a$, $b$ and $c$ are positive constants
+\item{} $f$, $g$, $u$ and $v$ are functions of the variable $x$
+\item{} $e$ is constant, the base of the natural logarithms
+\end{enumerate}
+
+\subsection{Signs of a Fraction}
+$\frac{a}{b} = -\frac{-a}{b} = +\frac{-a}{-b} = -\frac{a}{-b} = \frac{a}{b}$
+
+\subsection{Exponents}
+\begin{enumerate}
+\item{} $a^{0} = 1$, $a^{1} = a$
+\item{} $a^{-b} = \frac{1}{a^{b}}$, $a^{b}a^{c} = a^{b+c}$
+\item{} $\frac{a^{b}}{a^{c}} = a^{b-c} = \frac{1}{a^{c-b}}$
+\item{} $(a^{b})^{c} = a^{bc}$, $(\frac{a}{b})^{c} = \frac{a^{c}}{b^{c}}$
+\item{} $e \approx 2.7$. Remember this! This is often useful to know.
+\end{enumerate}
+
+\subsection{Logarithms (the inverse of exponents)}
+\begin{enumerate}
+\item{} $\log_{a}(a^{b}) = b$
+\item{} $\log_{a}(1) = 0$, $\log_{a}(b<1~\&~b>0) < 0$, $\log_{a}(b>1) > 0$, $\log_{a}(0) = \inf$
+\item{} $\log_{10}(10^{a}) = a$, $\log_{10}(10^{5}) = 5$, $\log_{10}(100,000) = 5$
+\item{} $\log_{e} = ln =$ natural logarithm$ = \log$ base $e$. Usually written just as $\log$ (e.g., in the examples below, $\log$ means $\log_{e}$)
+\item{} $e^{0} = 1$, $\log(1) = 0$, $\log(e) = 1$
+\item{} $\log(bc) = \log(b) + \log(c)$, $\log(\frac{b}{c})=\log(b)-\log(c)$
+\item{} $\log(a^{b}) = b\log(a)$, $\log(e^{bc}) = bc$, $\log(e^{a}) = a \log(e) = a$
+\item{} $\log(\frac{1}{a^{b}}) = \log{a^{-b}} = -b \log(a)$
+\item{} $\log(2) \approx 0.7$. Remember this! This is useful for estimating doubling times, since:
+\begin{equation}
+\begin{split}
+N_{0} e^{r t_{double}} = 2 N_{0}\\
+e^{r t_{double}} = 2\\
+r t_{double} = \log(2)\\
+t_{double} = \frac{\log(2)}{r}\\
+\end{split}
+\end{equation}
+\end{enumerate}
+
+\subsection{Linear algebra}
+Linear algebra is a simple subset of algebra that deals with linear combinations of variables (e.g. $f(x) = ax+b$, rather than $f(x) = axy+b$, or $f(x) = ax^{2} + b$). It is a particularly well-developed field, because there are many efficient algorithms for solving large linear systems efficiently (e.g. matrix multiplication, solving linear systems, least squares regression).
+
+\paragraph{} In general, there are three kinds of variables used in linear algebra. ``Scalars'' are simply single numbers (e.g. $x$). Furthermore, ``constant scalars'' are scalars that do no vary as a function of other variables (e.g. $a$, $b$, $5$, $\pi$).
+
+\paragraph{} ``Vectors'' are lists of scalars, and are usually written with an arrow overhead (e.g. vector $\overrightarrow{v} = \{1,3,9\}$). To indicate a position within a vector, we use subscripts. For example, $v_{1} = 1$, $v_{2} = 3$, and $v_{3} = 9$.
+
+\paragraph{} Finally, ``matrices'' are lists of vectors. While a matrix might include any number of vectors, however, all the vectors must be the same length (thus, all matrices can be represented as some kind of a rectangle). Matrices are usually indicated using a bold character, e.g.:
+\begin{equation}
+\textbf{M} =
+\begin{bmatrix}
+1 & 2\\
+3 & 4\\
+9 & 6
+\end{bmatrix}
+\end{equation}
+
+Here, \textbf{M} is a concatenation of $\overrightarrow{v}$, and another vector $\overrightarrow{u} = \{2, 4, 6\}$. We indicate particular elements of matrices using two subscripts, with rows first. For example, $\textbf{M}_{1,2} = 2$, because it references the first row, second column of \textbf{M}. Note that all vectors are also technically matrices, but with only one row or column. For example, vector \textbf{v} has 1 row, and three columns.
+
+\paragraph{Matrix multiplication} Matrix multiplication is a simple algorithm for efficiently calculating interactions between matrices and/or vectors. I was taught to remember how to conduct matrix multiplication by thinking about the left-most matrix as a series of drawers, which you turn 90$^{\circ}$, and plug into right matrix. For example, if we were to conduct the matrix multiplication operation $\textbf{M}$ against the vector $\overrightarrow{w} = \{0,2\}$, we would do the following:
+\begin{equation}
+\begin{split}
+\textbf{M}\times\overrightarrow{w}'\\
+= \{\textbf{M}_{1,1}\overrightarrow{w}_{1}+\textbf{M}_{1,2}\overrightarrow{w}_{2}, ~~ \textbf{M}_{2,1}\overrightarrow{w}_{1}+\textbf{M}_{2,2}\overrightarrow{w}_{2}, ~~ \textbf{M}_{3,1}\overrightarrow{w}_{1}+\textbf{M}_{3,2}\overrightarrow{w}_{2}\}\\
+= \{1\times0 + 2\times2, ~~ 3\times0 + 4\times2, ~~ 9\times0 + 6\times2\}
+= \{4,8,12\}\
+\end{split}
+\end{equation}
+
+Note, because of this, that the number of \textit{columns} in the left-most matrix must equal the number of \textit{rows} in the right-most matrix. Thus, in order to complete the operation above, we technically had to ``transpose'' $\overrightarrow{w}$ (that is, flip it 90$^{\circ}$), such that it has 2 rows and 1 column (with $\textbf{w}_{1,1} = 0$ and $\textbf{2}_{2,1} = 2$). We denote this with the $'$ symbol, as in $\textbf{M}\times\overrightarrow{w}'$.
+
+One other important thing about matrix multiplication is that it does not follow the same rules as regular multiplication. While regular multiplication is commutative (i.e. $ab = ba$), this is not true for matrix multiplication ($\textbf{A}\times\textbf{B}\neq\textbf{B}\times\textbf{A}$). Matrix multiplication is still distributive, though, such that $\textbf{A}\times(\textbf{B}+\textbf{C}) = \textbf{A}\times\textbf{B}+\textbf{A}\times\textbf{C}$.
+
+\subsection{Derivatives}
+Derivatives inform us about rates of change, slopes, curvature of functions, changes over time, etc. We will use derivatives primarily to describe population changes through time, and to help find equilibria and judge the stability of systems.
+
+\paragraph{} For a function $f(x)$, the derivative of $f(x)$ with respect to $x$ is indicated with several different notations. They are equivalent and interchangeable: $\frac{df}{dx}$, $\frac{d}{dx}(f(x))$, $f'(x)$.
+
+\paragraph{} Second derivatives (and higher orders) describe the derivative of a derivative - that is, the rate of change of the rate of change (e.g. acceleration). These can also have several notations: $\frac{d^{2}f}{dx^{2}}$, $\frac{d^{2}}{dx^{2}}(f(x))$, $f''(x)$.
+
+\paragraph{} Some basic differentiation rules:
+\begin{enumerate}
+\item{} $\frac{da}{dx}=0$, $\frac{d}{dx}(ax)=a$, $\frac{d}{dx}(au) = a \frac{du}{dx}$
+\item{} $\frac{d}{dx}(u^{n})=n(u^{n-1})\frac{du}{dx}$
+\item{} $\frac{d}{dx}(u+v) = \frac{du}{dx} + \frac{dv}{dx}$
+\item{} $\frac{d}{dx}(uv) = v\frac{du}{dx} + u\frac{dv}{dx}$
+\item{} $\frac{d}{dx}(\frac{u}{v}) = \frac{v\frac{du}{dx}-u\frac{dv}{dx}}{v^2}$
+\item{} $\frac{d}{dx}(e^{u}) = e^{u}\frac{du}{dx}$
+\item{} $\frac{d}{dx}(a^{u}) = a^{u}\log(a)\frac{du}{dx}$
+\item{} $\frac{d}{dx}(\log(u)) = \frac{1}{u}\frac{du}{dx}$
+\end{enumerate}
+
+\paragraph{} One of the most useful tools for taking derivatives is the ``chain rule''. This lets you break complex derivatives into simple, small pieces. Formally, given a system where $z(y)$ is a function of $y(x)$, the chain rule states: $\frac{dz}{dx} = \frac{dz}{dy}\frac{dy}{dx}$. More simply, this simply tells us that when we unpack complex derivatives, we start with the simplest derivative we can find, and multiply subsequent solutions by the simpler parts. For example, you'll note that the quotient rule for derivatives $\frac{d}{dx}(\frac{u}{v})$, could be re-written as:
+\begin{equation}
+\frac{d}{dx}(uv^{-1})
+\end{equation}
+
+To solve this, we start by using the product rule:
+\begin{equation}
+\frac{d}{dx}(uv^{-1}) = v^{-1}\frac{du}{dx} + u\frac{d}{dx}(v^{-1})
+\end{equation}
+
+We can now apply the chain rule to solve $\frac{d}{dx}(v^{-1})$ as:
+\begin{equation}
+\begin{split}
+\frac{d}{dx}(uv^{-1}) = v^{-1}\frac{du}{dx} + u\left((\frac{d}{dv}(v^{-1}))(\frac{dv}{dx})\right)\\
+\frac{d}{dx}(uv^{-1}) = v^{-1}\frac{du}{dx} + u\left((-v^{-2})(\frac{dv}{dx})\right)\\
+\frac{d}{dx}(uv^{-1}) = v^{-1}\frac{du}{dx} -v^{-2}u\left(\frac{dv}{dx}\right)\\
+\frac{d}{dx}(uv^{-1}) = \frac{v\frac{du}{dx}-u\frac{dv}{dx}}{v^2}
+\end{split}
+\end{equation}
+
+Proceed similarly for other complex systems, and don't panic!
+
+\subsection{Equilibria}
+One of the most common uses we will have for derivatives is to use them to determine whether a system is at an equilibrial state. The reason for this is pretty straightforward: given a function of $x$ and time $t$, $f(x, t)$ (e.g. $f(x,t) = x_{0} exp(rt)$), we know that any time that $\frac{d}{dt}(f(x)) = 0$, the system is not changing with time, and is therefore in an equilibrium (provided that $x$ has no effect on $t$, which is generally assumed in ecological models).
+
+\paragraph{} Even if a system is at equilibrium, though, this does not mean that they system is stable. Consider a pencil balancing vertically on its eraser -- while it may be in ``equilibrium'', in that it will not fall over without external perturbations, it is not really ``stable'', since any tiny motion of the tip of the pencil will lead it to fall over.
+
+Later on in this class, we will go over some more advanced methods for determining stability, particularly in discrete-time and multivariate systems. For now, though, recall that we can often determine stability for uni variate systems by looking at the second derivative (or rather in this case, the derivative with respect to $x$ of the derivative with respect to $t$). When the derivative, $\frac{d}{dx}(\frac{d}{dt}(f(x))) < 0$ (similar to the second derivative test for concavity) perturbations to the system will be canceled out by internal dynamics. Thus, we say that the system is ``stable'' (at least to small perturbations).
+
+\subsection{Some simple practice problems}
+\begin{enumerate}
+\item{} Simplify $e^{a-b}e^{a+b}$
+\item{} Simplify $(e^{a})^{2}$
+\item{} Rewrite the function of a product, $\log(ab)$, so that it involves a sum instead
+\item{} Simplify $a^{10}\frac{10^{a-b}}{10^{a+b}}$
+\item{} Simplify $\frac{\log(e^{a})e^{log(a)}}{a^{2}}$
+\item{} Are there any values for which $\log(a) = a$?
+\item{} What is the value of $\log_{4}1024$ to three significant digits? (Should not need a calculator)
+\item{} What is the transpose matrix \textbf{M} from the examples above?:
+\item{} What is $\overrightarrow{v}\times\textbf{M}$ from the examples above?
+\item{} Suppose that $f(x) = bx(1-x)$. For what values of $x$ does $\frac{df}{dx}=-1$?
+\item{} Suppose the $f(x)$ from above equals $\frac{d}{dt}(g(x,t))$. At what values of $x$ is $g(x)$ in equilibrium?
+\item{} For the same $f(x)$ above, are the equilibria that you identified stable or not?
+\end{enumerate}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\textbf{Answers:}
+
+\begin{enumerate}
+\item{} $e^{a-b}e^{a+b} = e^{a-b+a+b} = e^{2a}$
+\item{} $(e^{a})^{2} = e^{2a}$
+\item{} $\log(ab) = \log{a} + \log{b}$
+\item{} $a^{10}\frac{10^{a-b}}{10^{a+b}} = a^{10}10^{a-b}10^{-(a+b)} =a^{10}10^{a-b-a-b} = a^{10}10^{-2b}$
+\item{} $\frac{\log(e^{a})e^{log(a)}}{a^{2}} = \frac{a^{2}}{a^{2}} = 1$
+\item{} No: This would imply $a exp(a)$.
+\item{} $1024 = 2^{10} = 2^{2\times5} = (2^{2})^{5} = 4^{5}; \log_{4}1024 = 5.000$
+\item{}
+\begin{equation}
+\textbf{M}' =
+\begin{bmatrix}
+1 & 3 & 9\\
+2 & 4 & 6
+\end{bmatrix}
+\end{equation}
+\item{} $\overrightarrow{v}\times\textbf{M} = \{91, 68\}$
+\item{} $\frac{d}{dx}(f(x)) = b - 2bx = -1$; $\frac{b+1}{2b} = x$
+\item{} $\frac{d}{dt}(g(x,t)) = bx(1-x) = 0$; $x = \{0, 1\}$
+\item{} $\frac{d}{dx}(\frac{d}{dt}g(x,t))) = b - 2bx$. When $x=0$, this equals $b$, so the system is only stable here if $b<0$. For $x=1$, the equals $-b$, so the system is only stable here if $b>0$.
+\end{enumerate}
+
+\end{document}

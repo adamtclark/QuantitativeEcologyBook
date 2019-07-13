@@ -1,0 +1,240 @@
+\title{Chapter 4 Practice Questions}
+
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{pictexwd}
+\usepackage{xcolor}
+
+\def         \black#1{{\special{pdf:bc[0.00 0.00 0.00]}#1\special{pdf:ec}}}%
+\def         \green#1{{\special{pdf:bc[0.00 0.78 0.65]}#1\special{pdf:ec}}}%
+\def          \blue#1{{\special{pdf:bc[0.00 0.45 0.70]}#1\special{pdf:ec}}}%
+\def           \red#1{{\special{pdf:bc[0.80 0.40 0.00]}#1\special{pdf:ec}}}%
+\def        \yellow#1{{\special{pdf:bc[0.95 0.90 0.25]}#1\special{pdf:ec}}}%
+\def         \white#1{{\special{pdf:bc[1.00 1.00 1.00]}#1\special{pdf:ec}}}%
+
+\definecolor{red}{rgb}{0.80 0.40 0.00}
+\definecolor{green}{rgb}{0.00 0.78 0.65}
+\definecolor{blue}{rgb}{0.00 0.45 0.70}
+
+\begin{document}
+\date{}
+\maketitle
+
+
+\noindent{\textit{Question 4.1:}}
+\newline
+Consider density-independent, density-enhanced, and density-limited growth. Which of the following $s$ values correspond to which type of model?
+
+~\newline
+$s=0.01$
+\newline
+$s=-0.01$
+\newline
+$s=0$
+
+~\newline
+\noindent{\textit{Question 4.2:}}
+\newline
+Consider density-independent, density-enhanced, and density-limited growth. Which of these models predicts that populations will eventually reach a stable (i.e. unchanging) population size in the long-term?
+
+~\newline
+\noindent{\textit{Question 4.3:}}
+\newline
+To which population growth model does each of the following graphs of population size versus time correspond?
+~\\~\newline
+\beginpicture
+	\setcoordinatesystem units < .08 in, .0013 in> point at 0 0
+	\setplotarea x from 0 to 10, y from 0 to 1024
+	\axis left   label {$N(t)$} ticks numbered from 0 to 1000 by 250 /
+	\axis bottom label {$t$}    ticks numbered from 0 to   10 by 5   /
+	\put{a.} at 0 1150
+	\setplotsymbol ({.})
+	\setquadratic
+	\green{\plot 0 1 1 1.999 2 3.994 3 7.97206 4 15.8806 5 31.5089 6 62.025 7 120.203 8 225.957 9 400.858 10 641.029 11 871.139 12 983.395 12.5 991.5595 13 999.724 / }% 14 1000 15 1000 17 1000 / }%
+	\green{\multiput {$\bullet$} at 0 1 1 1.999 2 3.994 3 7.97206 4 15.8806 5 31.5089 6 62.025 7 120.203 8 225.957 9 400.858 10 641.029 11 871.139 12 983.395 / }% 13 999.724 / }%
+\endpicture \beginpicture
+	\setcoordinatesystem units < .08 in, .0013 in> point at 0 0
+	\setplotarea x from 0 to 10, y from 0 to 1024
+	\axis left   label {$N(t)$} ticks numbered from 0 to 1000 by 250 /
+	\axis bottom label {$t$}    ticks numbered from 0 to   10 by 5   /
+	\put{b.} at 0 1150
+	\setplotsymbol ({.})
+	\setquadratic
+	\blue {\plot 0 1 1 2 2 4 3 8 4 16 5 32 6 64 7 128 8 256 9 512 10 1024 / }%
+	\blue {\multiput {$\bullet$} at 0 1 1 2 2 4 3 8 4 16 5 32 6 64 7 128 8 256 9 512 / }%
+\endpicture \beginpicture
+	\setcoordinatesystem units < .08 in, .0013 in> point at 0 0
+	\setplotarea x from 0 to 10, y from 0 to 1024
+	\axis left   label {$N(t)$} ticks numbered from 0 to 1000 by 250 /
+	\axis bottom label {$t$}    ticks numbered from 0 to   10 by 5   /
+	\put{c.} at 0 1150
+	\setplotsymbol ({.})
+	\setlinear
+	\red  {\plot 0 3 1 3.45 2 4.045125 3 4.863277 4 6.045850 5 7.873465 6 10.97304 7 16.99341 8 31.43222 9 80.83145 10 407.5176 / }%
+	\red  {\arrow <8pt> [.2,.67] from 10 407.5176 to 10.083396 1120 }%
+	\red  {\multiput {$\bullet$} at 0 3 1 3.45 2 4.045125 3 4.863277 4 6.045850 5 7.873465 6 10.97304 7 16.99341 8 31.43222 9 80.83145 10 407.5176 / }%
+\endpicture
+
+~\pagebreak
+
+\noindent{\textit{Question 4.4:}}
+\newline
+Consider the three line segments labeled a., b., and c. below. To which types of population growth models do each of these segments correspond?
+~\\~\newline
+\beginpicture
+	\setcoordinatesystem units <3.25 in, 1 in> point at 1 -.15
+	\setplotarea x from 0 to 1.03, y from -.5 to 1.5
+	\axis bottom ticks withvalues 0 / at 0 / unlabeled quantity 11 /
+	\axis left   ticks withvalues 0 / at 0 / unlabeled quantity 9 /
+	\putrule from 0 0 to 1.03 0
+	\axis right / \axis top /
+	\put {Population size $N$}             [t] <0pt,-10pt> at .5 -.5
+	\put {\large $\frac{1}{N}\frac{\Delta N}{\Delta t}$} [r] <-14pt,0pt> at 0 .5
+	
+	\setdashes\setplotsymbol ({$\color{red} .$})
+	\blue{\plot 0 -.3 .3 .9 / }
+	\setdashes\setplotsymbol ({$\color{blue} .$})
+	\blue{\plot .3 .9 .4 .9 / }
+	\setdashes\setplotsymbol ({$\color{green} .$})
+	\blue{\plot .4 .9 1 -.5 / }
+
+	\put{a.} 							   [t]	at .08 .5
+	\put{b.} 							   [t]	at .32 1.1
+	\put{c.} 							   [t]	at .65 .46
+
+	\setsolid
+\endpicture
+
+~\newline
+\noindent{\textit{Question 4.5:}}
+\newline
+Consider the model $\frac{\Delta N}{\Delta t} = r N + s N^2$, where $r=0.2$ and $s=-0.01$. If the current population size $N(t) = 5$ individuals, what will population size be in one unit of time (i.e. $N(t+1)$)?
+
+~\newline
+\noindent{\textit{Question 4.6:}}
+\newline
+Consider the model $\frac{\Delta N}{\Delta t}\frac{1}{N} = r + s N$, where $r=0.2$ and $s=-0.01$. If the current population size $N(t) = 5$ individuals, what will population size be in one unit of time (i.e. $N(t+1)$)? Hint - should this answer be any different from that for \textit{Question 4.5}?
+
+~\newline
+\noindent{\textit{Question 4.7:}}
+\newline
+How can one transform the population growth rate equation $\frac{\Delta N}{\Delta t}$ into the per-individual population growth rate equation $\frac{\Delta N}{\Delta t}\frac{1}{N}$? What is the difference in interpretation between these two forms of expressing the model?
+
+~\newline
+\noindent{\textit{Question 4.8:}}
+\newline
+Consider the model $\frac{\Delta N}{\Delta t}\frac{1}{N} = r + s N$, where $r=0.6$ and $s=-0.15$. What is the carrying capacity (i.e. $K$) for this model? What does $K$ tell us about long-term dynamics for this population?
+
+~\pagebreak
+
+\noindent{\textit{Question 4.9:}}
+\newline
+Consider the model $\frac{\Delta N}{\Delta t}\frac{1}{N} = r + s N$, where $r=-0.2$ and $s=0.1$. What is the Allee point for this model? What does this tell us about dynamics for this population when initial population sizes are small?
+
+~\newline
+\noindent{\textit{Question 4.10:}}
+\newline
+Consider a population that follows the piecewise growth model shown in the figure for \textit{Question 4.4}. Imagine that for the Orthologistic growth phase, $r = -0.2$ and $s = 0.1$, while for the Logistic growth phase, $r = 0.6$ and $s$ = $-0.15$ (note these match the cases presented in \textit{Questions 4.8-4.9} above).
+
+What can we conclude about the maximum ``stable'' population size? What can we conclude about the minimum viable population size?
+
+\pagebreak
+\noindent{\textbf{Answers:}}
+
+~\newline
+\textit{Question 4.1:}
+\newline
+Recall that the general equation that we are using to model per individual population growth rate in this chapter is:
+\begin{equation*}
+\frac{1}{N}\frac{\Delta N}{\Delta t} = r + sN
+\end{equation*}
+
+Since $s$ tells us the direction of the effect of increases in $N$ on the per individual population growth rate, we therefore know that:
+
+~\newline
+$s=0.01$ is density-enhanced, because increases in $N$ lead to increases in per individual population growth rate.
+\newline
+$s=-0.01$ is density-limited, because increases in $N$ lead to decreases in per individual population growth rate.
+\newline
+$s=0$ is density-independent, because increases in $N$ are not associated with a change in per individual population growth rate.
+
+~\newline
+\textit{Question 4.2:}
+\newline
+There are two ways to answer this question. First, we might decide that only density-limited growth leads to a stable positive population size in the long-term, since density-independent and density-enhanced growth can both lead to infinitely large populations over time.
+
+However, one could also argue that density-independent and density-enhanced growth can lead to a ``stable" population size of zero if $r$ is negative. These sorts of conditions are referred to as ``Allee effects" when they occur in density-enhanced growth.
+
+~\newline
+\textit{Question 4.3:}
+\newline
+a. density-limited growth \\
+b. density-independent growth \\
+c. density-enhanced growth (note vertical asymptote, denoted by arrow)
+
+~\newline
+\textit{Question 4.4:}
+\newline
+a. density-enhanced growth \\
+b. density-independent growth \\
+c. density-limited growth
+
+~\newline
+\textit{Question 4.5:}
+\newline
+Given $\frac{\Delta N}{\Delta t} = 0.2 N + -0.01 N^2$, with $N(t) = 5$, we find $\frac{\Delta N}{\Delta t} = 0.75$.
+\newline
+Since $N(t+1) = N(t) + \frac{\Delta N}{\Delta t}$, we therefore know $N(t+1) = 5 + 0.75 = 5.75$.
+
+~\newline
+\textit{Question 4.6:}
+\newline
+Given $\frac{\Delta N}{\Delta t}\frac{1}{N} = 0.2 + -0.01 N$, with $N(t) = 5$, we find $\frac{\Delta N}{\Delta t}\frac{1}{N} = 0.15$.
+\newline
+Since $N(t+1) = N(t) + \left( \frac{\Delta N}{\Delta t}\frac{1}{N} \right) N$, we therefore know $N(t+1) = \left(5 + (0.15) 5 \right) = 5 + 0.75 = 5.75$. Note that this is identical to the answer for the previous question, since the $s$ and $r$ values are the same.
+
+~\newline
+\textit{Question 4.7:}
+\newline
+The per-individual population growth rate is calculated by dividing the population growth rate $\frac{\Delta N}{\Delta t}$ by the total population size (i.e. multiplying by $\frac{1}{N}$). Just as the population growth rate describes the change in population size per unit time, the per-individual population growth rate therefore describes the change in population size per unit time, per individual.
+
+As an example, the annual population growth rate of the United States from 2015 to 2016 was approximately 2.2 million people -- that is, from 2015 to 2016, the total population size increased by 2.2 million. This translates to an annual per-individual population growth rate of 0.007 per person per year.
+
+~\newline
+\textit{Question 4.8:}
+\newline
+There are a few ways to solve this problem. First, we can remember the formula from the textbook $K = -r/s = -0.6/-0.15 = 2$.
+
+Alternatively, we can use the equation for per-individual growth rate to determine when total growth equals zero:
+\begin{align*}
+0 = \frac{\Delta N}{\Delta t}\frac{1}{N} &= r + s K\\
+0 &= 0.6 - 0.15 K \\
+0.15 K &= 0.6 \\
+K &= 4
+\end{align*}
+
+Note that we could have also solved $K$ using the formula for the population growth rate (since the population growth rate also equals zero when the per-individual growth rate equals zero). However, this might prove to be more difficult, since the population growth rate formula includes a quadratic term.
+
+For any of these solutions, the value $K = 2$ tells us that in the long term, populations with starting abundances $N>0$ will tend to grow towards $N=2$, but will not exceed this number.
+
+~\newline
+\textit{Question 4.9:}
+\newline
+Again, there are a few ways to solve this problem. First, we can remember the formula from the textbook: $\mathrm{Allee~point} = -r/s = -(-0.2)/0.1 = 2$.
+
+Alternatively, we can use the equation for per-individual growth rate to determine when total growth equals zero:
+\begin{align*}
+0 = \frac{\Delta N}{\Delta t}\frac{1}{N} &= r + s K\\
+0 &= -0.2 + 0.1 N \\
+0.1 N &= 0.2 \\
+N &= 2
+\end{align*}
+
+In either case, the Allee point at $N = 4$ tells us that population growth rates will be negative for any population size $N\leq4$. Thus, for positive growth, initial population sizes must be larger than $4$.
+
+~\newline
+\textit{Question 4.10:}
+\newline
+Following from the solutions above, we know that $K$ for the Logistic growth phase is $4$. Thus, the population cannot maintain a stable population size greater than this. Similarly, we know that the Allee point for the Orthologistic growth phase is 2. Thus, the minimum viable population size (below which the population will decline towards extinction) is $2$.
+
+\end{document}
