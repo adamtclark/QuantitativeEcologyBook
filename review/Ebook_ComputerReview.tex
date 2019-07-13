@@ -1,0 +1,310 @@
+\title{Computer Coding Review}
+\date{\today}
+
+\documentclass[12pt]{article}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{hyperref}
+\usepackage{cite}
+\usepackage{subfig}
+\usepackage{enumitem}
+\usepackage{amsmath}
+\usepackage{listings}
+%\usepackage{fullpage}
+%\bibliographystyle{science}
+\bibliographystyle{plain}
+
+\lstdefinelanguage{Maxima}{
+  keywords={addrow,addcol,zeromatrix,ident,augcoefmatrix,ratsubst,diff,ev,tex,%
+    with_stdout,nouns,express,depends,load,submatrix,div,grad,curl,%
+    rootscontract,solve,part,assume,sqrt,integrate,abs,inf,exp},
+  sensitive=true,
+  comment=[n][\itshape]{/*}{*/}
+}
+
+\newif\ifanswers
+\answerstrue % comment out to hide answers
+
+\begin{document}
+\maketitle
+
+\section{Practice problems}
+\setcounter{equation}{0}
+This assignment's focus is to get you to practice using a computer to help solve mathematical problems. Please submit a printout that includes all relevant computer code. This question asks you to simulate the growth of a single population with an Allee effect. The population has $n$ individuals at time $t$, and its' growth is governed by the following equation:
+\begin{equation}
+\frac{dN}{dt} = f(n) = rn(1-\frac{n}{k})(\frac{n}{a}-1)
+\end{equation}
+
+\begin{enumerate}[label=\alph*]
+\item{} Assign values 1, 10, and 100 to variables $r$, $a$, and $k$ respectively (i.e. $r = 1$, $a = 10$, $k = 100$).
+\item{} Define the function, $f(n)$, for the growth rate of the population, with $n$ (the population size) as an input. Evaluate this function at $n=20$.
+\item{} Plot $f(n)$ with $n$ values ranging from 0 to 110.
+\item{} Define a new function, $f(n, r, a, k)$ with 4 inputs, and plot $f(n,1, 25,100)$ with $n$ values ranging from 0 to 110.
+\item{} Simulate the growth of a population over 100 years, with 15 individuals to begin with (i.e. at $n_{0}=15$), and $r = 1$, $a = 10$, and $k = 100$. Plot the resulting population vs. time dynamics.
+\item{} Repeat this procedure with 5 individuals to start with (i.e. n[0]=5).
+\item{} Create a function with inputs $r$, $a$, $k$, and $n_{0}$ that simulates this the growth of the population over 100 years and prints a graph of the population trajectory.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\ifanswers
+\textbf{Answers}
+For each of these questions, example code is included below for completing the tasks in \textit{Mathematica}, \textit{R}, and \textit{Maxima}.
+
+\begin{enumerate}[label=\alph*]
+\item{}
+\textit{Mathematica code:}
+\lstset{language=Mathematica, basicstyle=\footnotesize} 
+\begin{lstlisting}[frame=single]
+r = 1; a = 10; k = 100;
+\end{lstlisting}
+
+\textit{R code:}
+\lstset{language=R, basicstyle=\footnotesize} 
+\begin{lstlisting}[frame=single]
+r = 1; a = 10; k = 100;
+\end{lstlisting}
+
+\textit{Maxima code:}
+\lstset{language=Maxima, basicstyle=\footnotesize} 
+\begin{lstlisting}[frame=single]
+r: 1; a: 10; k: 100;
+\end{lstlisting}
+
+\item{}
+\textit{Mathematica code:}
+\lstset{language=Mathematica, basicstyle=\footnotesize} 
+\begin{lstlisting}[frame=single]
+F = Function[{n}, 1*n*(1 - n/100)*(n/10 - 1)];
+F[20]
+\end{lstlisting}
+
+\textit{R code:}
+\lstset{language=R, basicstyle=\footnotesize} 
+\begin{lstlisting}[frame=single]
+F = function(n) {1*n*(1 - n/100)*(n/10 - 1)}
+F(20)
+\end{lstlisting}
+
+\textit{Maxima code:}
+\lstset{language=Maxima, basicstyle=\footnotesize} 
+\begin{lstlisting}[frame=single]
+F(n):= 1*n*(1 - n/100)*(n/10 - 1);
+F(20);
+\end{lstlisting}
+
+\item{}
+\textit{Mathematica code:}
+\lstset{language=Mathematica, basicstyle=\footnotesize} 
+\begin{lstlisting}[frame=single]
+Plot[F[n], {n, 0, 110}]
+\end{lstlisting}
+
+\textit{R code:}
+\lstset{language=R, basicstyle=\footnotesize} 
+\begin{lstlisting}[frame=single]
+x<-seq(0, 110, length=100)
+plot(x, F(x), type="l")
+\end{lstlisting}
+
+\textit{Maxima code:}
+\lstset{language=Maxima, basicstyle=\footnotesize} 
+\begin{lstlisting}[frame=single]
+plot2d (F(n), [n, 0, 110]);
+\end{lstlisting}
+Note, if you are using \textit{wxMaxima}, then you need to use the command ``wxplot2d''
+
+\item{}
+\textit{Mathematica code:}
+\lstset{language=Mathematica, basicstyle=\footnotesize} 
+\begin{lstlisting}[frame=single]
+F = Function[{n, r, a, k}, r*n*(1 - n/k)*(n/a - 1)];
+Plot[F[n, 1, 25, 100], {n, 0, 110}]
+\end{lstlisting}
+
+\textit{R code:}
+\lstset{language=R, basicstyle=\footnotesize} 
+\begin{lstlisting}[frame=single]
+F = function(n, r, a, k) {r*n*(1 - n/k)*(n/a - 1)}
+x<-seq(0, 110, length=100)
+plot(x, F(x, 1, 25, 100), type="l")
+\end{lstlisting}
+
+\textit{Maxima code:}
+\lstset{language=Maxima, basicstyle=\footnotesize} 
+\begin{lstlisting}[frame=single]
+F(n,r,a,k):= r*n*(1 - n/k)*(n/a - 1);
+plot2d (F(n, 1, 25, 100), [n, 0, 110]);
+\end{lstlisting}
+
+\item{}
+\textit{Mathematica code:}
+\lstset{language=Mathematica, basicstyle=\footnotesize} 
+\begin{lstlisting}[frame=single]
+s = NDSolve[{y'[x] == F[y[x], 1, 10, 100], y[0] == 15},
+  y, {x, 0, 100}]
+Evaluate[y[1] /. s]
+Plot[Evaluate[y[x] /. s], {x, 0, 100}, PlotRange -> All]
+\end{lstlisting}
+
+\textit{R code:}
+\lstset{language=R, basicstyle=\footnotesize} 
+\begin{lstlisting}[frame=single]
+require(deSolve)
+odefun<-function(time, state, pars) {
+  return(list(F(state, r=1, a=10, k=100)))
+}
+out<-ode(y = 15, times = seq(0, 100, length=100),
+  func = odefun)
+plot(out[,1], out[,2], type="l", xlab="time", ylab="n")
+\end{lstlisting}
+Note - if you do not already have ``deSolve'' installed, you will need to run the command: \textit{install.packages(``deSolve'')} before you can do anything else.
+
+\textit{Maxima code:}
+\lstset{language=Maxima, basicstyle=\footnotesize} 
+\begin{lstlisting}[frame=single]
+plotdf(F(n, 1, 10, 100), [t, n], [trajectory_at, 0, 15],
+  [direction, forward], [t, 0, 100], [n, 0, 100]);
+\end{lstlisting}
+
+\item{}
+\textit{Mathematica code:}
+\lstset{language=Mathematica, basicstyle=\footnotesize} 
+\begin{lstlisting}[frame=single]
+s = NDSolve[{y'[x] == F[y[x], 1, 10, 100], y[0] == 5},
+  y, {x, 0, 100}]
+Evaluate[y[1] /. s]
+Plot[Evaluate[y[x] /. s], {x, 0, 100}, PlotRange -> All]
+\end{lstlisting}
+
+\textit{R code:}
+\lstset{language=R, basicstyle=\footnotesize} 
+\begin{lstlisting}[frame=single]
+odefun<-function(time, state, pars) {
+  return(list(F(state, r=1, a=10, k=100)))
+}
+out<-ode(y = 5, times = seq(0, 100, length=100),
+  func = odefun)
+plot(out[,1], out[,2], type="l", xlab="time", ylab="n")
+\end{lstlisting}
+
+\textit{Maxima code:}
+\lstset{language=Maxima, basicstyle=\footnotesize} 
+\begin{lstlisting}[frame=single]
+plotdf(F(n, 1, 10, 100), [t, n], [trajectory_at, 0, 5],
+  [direction, forward], [t, 0, 100], [n, 0, 100]);
+\end{lstlisting}
+
+\item{}
+\textit{Mathematica code:}
+\lstset{language=Mathematica, basicstyle=\footnotesize} 
+\begin{lstlisting}[frame=single]
+plotF = Function[{n0, r, a, k}, s = NDSolve[{y'[x] == F[y[x], r, a, k],
+    y[0] == n0},y, {x, 0, 100}];
+  Plot[Evaluate[y[x] /. s], {x, 0, 100}, PlotRange -> All]]
+\end{lstlisting}
+
+\textit{R code:}
+\lstset{language=R, basicstyle=\footnotesize} 
+\begin{lstlisting}[frame=single]
+pltfun<-function(n0, r, a, k) {
+  odefun<-function(time, state, pars) {
+    return(list(F(state, r=pars[1], a=pars[2], k=pars[3])))
+  }
+  out<-ode(y = n0, times = seq(0, 100, length=100),
+    func = odefun, parms=c(r, a, k))
+  plot(out[,1], out[,2], type="l", xlab="time", ylab="n")
+}
+\end{lstlisting}
+
+\textit{Maxima code:}
+\lstset{language=Maxima, basicstyle=\footnotesize} 
+\begin{lstlisting}[frame=single]
+plotF(n0, r, a, k):=plotdf(F(n, r, a, k), [t, n],
+  [trajectory_at, 0, n0], [direction, forward],
+  [t, 0, 100], [n, 0, k]);
+\end{lstlisting}
+\end{enumerate}
+\fi
+
+\end{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Worked example}
+\setcounter{equation}{0}
+Demographic data for a two-age class species shows the following population sizes over a 3 year period: $N_{0}=\left\{100, 50\right\}$, $N_{1}=\left\{85, 80\right\}$, $N_{2}=\left\{106, 68\right\}$. Using these data, find the Leslie matrix:
+\begin{equation}
+\textbf{L} =
+\begin{bmatrix}
+b_{1} & b_{2}\\
+s_{1} & 0
+\end{bmatrix}
+\end{equation}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\ifanswers
+\textbf{Answers}
+From transition of timestep 1 to 2 we find:
+\begin{equation}
+\begin{split}
+85 = 100 b_{1} + 50 b_{2}\\
+80 = 100 s_{1}
+\end{split}
+\end{equation}
+
+From this, we already know that $s_{1} = \frac{80}{100} = 0.8$. However, we don't yet have enough information to separate $b_{1}$ and $b_{2}$.
+
+From transition of timestep 1 to 2 we find:
+\begin{equation}
+\begin{split}
+106 = 85 b_{1} + 80 b_{2}\\
+\end{split}
+\end{equation}
+
+Now, we can solve for $b_{1}$ as a function of $b_{2}$, and solve for both values:
+\begin{equation}
+\begin{split}
+ 100 b_{1} = 85 - 50 b_{2}\\
+ b_{1} = 0.85 - 0.5 b_{2}\\
+ 106 = 85 (0.85 - 0.5 b_{2}) + 80 b_{2}\\
+ 106 = 85 (0.85 - 0.5 b_{2}) + 80 b_{2}\\
+ 106 = 72.25 - 42.5 b_{2} + 80 b_{2}\\
+ 33.75 = 37.5 b_{2}\\
+ b_{2} = 0.9\\
+ b_{1} = 0.4
+\end{split}
+\end{equation}
+
+So, that wasn't too bad to do by hand, but we're likely going to have some hairier math to do in the near future. Below, I'm going to outline a few ways that we can use a computer to do arithmetic for us. I'm going to focus on three software package: \textit{R}, \textit{Mathematica}, and \textit{Maxima}.
+
+\textit{R} is a statistical programming language that I've used to make a lot of the figures for the homework problems here. It can do simple linear algebra problems like this one (i.e. no quadratics or other higher-order polynomials).
+\lstset{language=R, basicstyle=\footnotesize} 
+\begin{lstlisting}[frame=single]
+M = rbind(c(100, 50), c(85, 80))
+b=c(85, 106)
+solve(M, b)
+\end{lstlisting}
+Answer: [1] 0.4 0.9
+
+Here, we're creating a matrix $\textbf{M}$, where each row contains linear coefficients from an equation, and each column represents a variable. We then solve for the unknown variables in relation to vector $\overrightarrow{b}$, which contains the scalar coefficient (i.e. numeric answer) for each equation. The solve command then returns the coefficient corresponding to each column in $\textbf{M}$.
+
+Often, however, we have nonlinear equations, which involve complex interactions among unknown parameters. To solve these kinds of systems, we have to use more sophisticated programs. \textit{Mathematica} was one of the first computer programs that was capable of doing this (in the late 1980's!), and is still one of the best.
+\lstset{language=Mathematica, basicstyle=\footnotesize} 
+\begin{lstlisting}[frame=single]
+Solve[b1*100 +b2*50==85 && b1*85+b2*80==106]
+\end{lstlisting}
+Answer: {{b1 $\rightarrow$ 2/5, b2 $\rightarrow$ 9/10}}
+
+The syntax is very easy, and it works with pretty crazily complicated equations. The downside is that it can be quite expensive, and software licenses have to be renewed each year. Because of this, I'll also be including code for a free program called \textit{Maxima}. It's a bit harder to install and use, but on the bright side, you will always be able to access it for free.
+\lstset{language=Maxima, basicstyle=\footnotesize} 
+\begin{lstlisting}[frame=single]
+f1(b1, b2) := b1*100 +b2*50 -85;
+f2(b1, b2) := b1*85+b2*80 -106;
+solve([f1(b1,b2), f2(b1,b2)], [b1, b2]);
+\end{lstlisting}
+Answer: [[b1 = 2/5, b2 = 9/10]]
+
+Note that in this case we are solving the equations under the assumption that they both equal zero (which is why the subtract the scalar coefficient from each equation). You can use any method that you want to solve problems for this class, and I will do my best to help debug code for whichever methods you use. Just make sure that any time you turn in an assignment, you include the computer code that you used to get your answers.
+\fi
+
+
