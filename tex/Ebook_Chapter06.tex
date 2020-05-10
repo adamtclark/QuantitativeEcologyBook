@@ -1,0 +1,92 @@
+\title{Chapter 6 Practice Questions}
+
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{graphicx}
+
+\begin{document}
+\date{}
+\maketitle
+
+For the following questions, consider the figure below showing human per-capita population growth rates as a function of population size. In case you are curious how it was made, the script used for generating this figure can be found in the ``ch06\_q1.R'' file in the ``tex/scripts'' folder of the GitHub page.
+
+\begin{figure}[ht]
+  \includegraphics[width=\linewidth]{images/ch06_q1.pdf}
+\end{figure}
+
+\pagebreak
+\noindent{\textit{Question 6.1:}}
+\newline
+What types of growth regimes are represented by the red vs. blue dashed lines? What does this mean for the long-term population dynamics expected during each regime?
+
+~\newline
+\noindent{\textit{Question 6.2:}}
+\newline
+How can we approximate $r$ and $s$ from this graph? What are the approximate values of these parameters for each phase of growth?
+
+~\newline
+\noindent{\textit{Question 6.3:}}
+\newline
+What is the expected time at which population size should reach infinity for the orthologistic growth example? For initial population size, use 1687 as year 0, such that $N_0 = 0.606$ (see Table 6.1 in the textbook).
+
+~\newline
+\noindent{\textit{Question 6.4:}}
+\newline
+What is the expected carrying capacity for the logistic growth example?
+
+~\newline
+\noindent{\textit{Question 6.5:}}
+\newline
+Recall that $\frac{\mathrm{d}N}{\mathrm{d}t} = r + sN$ for the simple models that we have been using thus far. For the orthologistic growth regime in the above figure, what is the expected per-capita growth rate for $N \approx 0$? What does this suggest biologically? What is the critical threshold at which $\frac{\mathrm{d}N}{\mathrm{d}t} = 0$ for this model? What does this value represent?
+
+~\newline
+
+\pagebreak
+\noindent{\textbf{Answers:}}
+
+~\newline
+\textit{Question 6.1:}
+\newline
+The red dashed line represents orthologistic (i.e. density-enhanced) growth, whereas the blue dashed line represents logistic growth (i.e. density-limited) growth. During orthologistic growth, the population is expected to reach an infinitely large size over a finite time horizon. During logistic growth, the population is expected to approach a carrying capacity.
+
+~\newline
+\textit{Question 6.2:}
+\newline
+For both growth regimes, $r$ represents the y-intercept (i.e. where the dashed lines hit the y-axis at N = 0), whereas $s$ represents the slope.
+
+For the orthologistic regime, the y-intercept is about 1/5 of the way between 0 and -0.005, suggesting that it is around -0.001 (actual value is $r = -0.001434706$). The slope is positive. Since slope equals ``rise'' over ``run'', and the growth rate increases from about -0.001 at $N = 0$ to about 0.0352 at $N = 6$, we can approximate the slope as $s \approx (0.0352 - (-0.001))/6 = 0.0362/6 \approx 0.006$ (actual value is $s = 0.006737780$).
+
+For the logistic regime, the y-intercept is about 1/5 of the way between 0.030 and 0.035, suggesting that it is around 0.031 (actual value is $r = 0.031455564$). The slope is negative. Since the growth rate decreases from about 0.031 at $N = 0$ to about 0.001 at $N = 10$, we can approximate the slope as $s \approx (0.001 - 0.031)/10 = -0.03/10 = -0.003$ (actual value is $s = -0.003033209$).
+
+~\newline
+\textit{Question 6.3:}
+\newline
+From the equation in Ch. 5, recall that
+
+$$t_\infty = \frac{1}{r}~\mathrm{ln}\left(1 + \frac{r}{s}\frac{1}{N_0} \right)$$
+Thus, we can calculate the singularity for the orthologistic growth regime as
+
+$$t_\infty \approx \frac{1}{-0.001}~\mathrm{ln}\left(1 + \frac{-0.001}{0.006}\frac{1}{0.606} \right) \approx 322$$
+How do we interpret this value? Since we are using 1687 as year 0, this tells us that we expect the singularity 322 years after year zero - i.e. around year 2009.
+
+~\newline
+\textit{Question 6.4:}
+\newline
+There are two ways to answer this question. Recall from Ch. 5 that $K = -r/s$. Thus, we can approximate $K$ as $K \approx -0.031/(-0.003) \approx -10.37$. Alternatively, we could look at the point where the blue line intersects the x-axis. Note that these two estimates match one another closely.
+
+~\newline
+\textit{Question 6.5:}
+\newline
+In the $r+sN$ model, $\frac{\mathrm{d}N}{\mathrm{d}t \approx r}$ for $N \approx 0$. Thus, we expect $\frac{\mathrm{d}N}{\mathrm{d}t} \approx -0.001$. This suggests negative per-capita growth - i.e. human populations just above zero abundance are not stable in this model, as they will experience negative growth until they reach zero abundance.
+
+Using the equation $\frac{\mathrm{d}N}{\mathrm{d}t} = r + sN = -0.001 + 0.006N$, we can solve for the expected N needed to reach a per-capita growth rate of zero as
+
+$$-0.001 + 0.006N = 0$$
+$$0.006N = 0.001$$
+$$N = 0.001/0.006 \approx 0.167$$
+As discussed in the textbook, this population size is known as the ``Allee'' point, and represents the minimum viable population size needed for per-capita growth. Any starting populations smaller than this value are expected to decline towards zero abundance over time.
+
+
+~\newline
+
+\end{document}
