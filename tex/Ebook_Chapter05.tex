@@ -2,6 +2,7 @@
 
 \documentclass[12pt]{article}
 \usepackage{amsmath}
+\usepackage{graphicx}
 
 \begin{document}
 \date{}
@@ -10,15 +11,58 @@
 
 \noindent{\textit{Question 5.1:}}
 \newline
-Question
+In the text, we presented several different versions of code for simulating population growth over 20 time steps. Below is a slighly updated script, written for the R programming language, that allows for variable time step lengths, controlled by variable $X$. Unlike the example in the book, the script also saves population sizes to the variable $N$ and plots them.
+
+\begin{verbatim}
+r=1; s=-0.001;               # set parameter values
+dt=1/X;                      # set time step size
+timevec=seq(0, 20, by=dt);   # vector of time steps
+Nvec=numeric(length(timevec)); # empty vector for storing abundances
+N=1;                         # initial abundance
+t=0;                         # set initial time to zero
+i=1;                         # counter for tracking position in N vector
+
+while(i<=length(timevec)) {
+  dN=(r+s*N)*N*dt;           # calculate dN
+  N=N+dN;                    # add dN to the previous N value
+  if(N<0) N=0;               # prevent negative populations
+  Nvec[i]=N;                 # store new N value
+  t=t+dt;                    # step forward in time
+  i=i+1;                     # add one to counter
+}
+
+plot(timevec, Nvec, type="l") # plot results
+\end{verbatim}
+Try running this example code for several different values of $X$ (e.g. $X = 1$, $X = 2$, $X = 5$, ...). What changes as $X$ gets bigger? What doesn't change? Why?
+
+
 
 ~\newline
 \noindent{\textit{Question 5.2:}}
 \newline
-Question
+Imagine that we wish to simulate the example code in \textit{5.1} to represent a truly continuous-time system? How would we do this in theory vs. in practice? How would we know that our simulation is correct?
 
 ~\newline
+\noindent{\textit{Question 5.3:}}
+\newline
+Consider a population undergoing exponential growth, such that dynamics follow
 
+$$N(t) = e^{0.2t}$$
+What does the ``doubling time'' in such a population represent (i.e. what does it ``mean'' from an ecological perspective)? What is the doubling time for this population?
+
+~\newline
+\noindent{\textit{Question 5.4:}}
+\newline
+
+What is the carrying capacity $K$ for the population in Question \textit{5.1} ? How can we calculate this value in terms or $r$ and $s$? Plot out the dynamics for this population over 20 time steps using Eq. (5.2) in the main text. 
+
+
+~\newline
+\noindent{\textit{Question 5.5:}}
+\newline
+Imagine that for the population described in Question \textit{5.1}, $s = 0.001$ rather than $-0.001$. How would this alter the kind of growth that the population is undergoing? What critical time point is now associated with this population? Calculate the value of this critical time point.
+
+~\newline
 
 \pagebreak
 \noindent{\textbf{Answers:}}
@@ -26,13 +70,71 @@ Question
 ~\newline
 \textit{Question 5.1:}
 \newline
-Answer
+As $X$ gets larger, the time-steps used for the simulations grow smaller. As a result, the simulations become less like a discrete-time model (i.e. with $\frac{\Delta N}{\Delta t}$) and more like a continuous-time model (i.e. with $\frac{\mathrm{d}N}{\mathrm{d}t}$).
+
+\begin{figure}[ht]
+  \includegraphics[width=\linewidth]{images/ch05_q1.pdf}
+\end{figure}
+
+
+For these time steps, changing $X$ does not have any noticeable effect on the equilibrium abundance (all three lines flatten off around $N = 1000$). However, larger $X$ (and thus shorter time steps) lead $N$ to approach equilibrium more rapidly. This occurs because of ``compound'' growth -- i.e. the increase in population size in the past time step contributes to growth in the following time step, leading to altogether faster growth in this example. However, this result is not general -- different systems and different time steps can lead to all kinds of variability between discrete-time and continuous-time models.
 
 ~\newline
 \textit{Question 5.2:}
 \newline
-Answer
+In theory, we would need to drop $\mathrm{d}t$ to be infinitely small in order to simulate a continuous-time system. In practice, however, we can just drop $\mathrm{d}t$ to be very small. We can double-check our choice by picking smaller and smaller values of $\mathrm{d}t$ until our result no longer changes. For the example above, $\mathrm{d}t$ of about $1/50$ seems to work well -- try simulating smaller step sizes, and you will see that the predicted abundance dynamics no longer change much beyond this point.
+
+Note that one other solution, for this particular system, would be to compare our simulated dynamics to the ``true'' abundances predicted by the analytical solution to the differential equation
+$$N(t) = \frac{1}{\left( \frac{s}{r}+\frac{1}{N_0} \right) e^{rt}-\frac{s}{r}}$$
+If our simulated dynamics come close to this analytical solution, then we know for sure that our step-size is small enough. However, note that for most differential equations in ecology (especially systems with more than one species), there is no known analytical solution, meaning that this approach cannot be used.
 
 ~\newline
+\textit{Question 5.3:}
+\newline
+Doubling time is the amount of time needed for a population to double in size. In this example, we have exponential growth with $r = 0.2$. Following Eq. (5.4) in the textbook, doubling time $\tau$ can be calculated as
+
+$$\tau = \frac{\mathrm{ln}(2)}{r} \approx \frac{0.693}{0.2} = 3.465 $$
+So, we would expect this population to double in size roughly every three and a half time units -- or at least, for it to do so as long as it continues to grow exponentially.
+
+~\newline
+\textit{Question 5.4:}
+\newline
+Visually, we can say that the carrying capacity $K$ is around $N = 1000$. We can calculate this value exactly using the solution in the main text, $K = -r/s$, or $K = -1/-0.001 = 1/0.001 = 1000$.
+
+We can plot the dynamics in terms of the analytical solution in Eq. (5.2) in the textbook using the following code. Note that unlike the code in the book, this example will only run in the R programming language
+
+\begin{verbatim}
+r=1; s=-0.001;   # set parameter values
+N0 = 1;          # initial abundance
+times = seq(0, 20, by=0.1) # a vector of times
+
+# function for calculating analytical solution
+# define variables that are used in the function
+logisticfun=function(r, s, N0, t) {
+  # operations to perform within the function 
+  N = 1/((s/r+1/N0)*exp(-r*times)-s/r)
+  # value to return at the end of the function
+  return(N)                                
+}
+
+Nt = logisticfun(r=r, s=s, N0=N0, t=times) # run function
+plot(times, Nt, type="l")
+\end{verbatim}
+The example above defines a function in terms of variables $r$, $s$, and $t$, and returns the predicted values for $N(t)$. Don't worry if your solution looks different -- we'll discuss function definitions in R in more detail later. The main point is that your resulting plot should look something like this
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.6\linewidth]{images/ch05_q4.pdf}
+\end{figure}
+
+~\newline
+\textit{Question 5.5:}
+\newline
+Given $s = 0.001$, the population is undergoing density-enhanced, or orthologistic, growth. A key feature of such a population is that it is subject to a finite time ``singularity'', at which population size is predicted to reach infinity. Following the equation in the main text, we can calculate this time point as
+
+$$t_\infty = \frac{1}{r}~\mathrm{ln}\left(1 + \frac{r}{s}\frac{1}{N_0} \right) = \frac{1}{1}~\mathrm{ln}\left(1 + \frac{1}{0.001}\frac{1}{1} \right) \approx 6.90$$
+That is, after about 6.9 time steps, this model predicts that the population size rapidly approaches infinity. In reality, of course, this would tell us that the population must switch to some other form of growth before this limit is reached, since infinite population sizes are not physically possible.
+
+
 
 \end{document}
