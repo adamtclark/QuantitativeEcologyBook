@@ -2,7 +2,7 @@ These exercises are meant to be paired with the "Quantitative Ecology: A New Uni
 
 The exercises are grouped by chapter, along with some reviews of various mathematical methods that may come in handy.
 
-The repository includes four folders - "pdf" includes PDFs' of questions and solutions, and is probably the best place to start. The "review" folder includes material that might be helpful for understanding some of the concepts raised in the textbook, such as linearized stability analysis. The .tex code used to make the pdf's is available in the "tex" folder. Finally, the "templates" folder includes some source files that you might need to compile the .tex code properly.
+The repository includes five folders - "pdf" includes PDFs' of questions and solutions, and is probably the best place to start. The "review" folder includes material that might be helpful for understanding some of the concepts raised in the textbook, such as linearized stability analysis. The .tex code used to make the pdf's is available in the "tex" folder. Data needed for some of the problems is in the "data" folder. Finally, the "templates" folder includes some source files that you might need to compile the .tex code properly.
 
 Feel free to "fork" this repository, add problems and solutions of your own. Alternatively, feel free to contact me (Adam Clark, adam.tclark@gmail.com) with comments or suggestions.
 
