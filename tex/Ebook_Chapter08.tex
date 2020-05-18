@@ -1,0 +1,96 @@
+\title{Chapter 8 Practice Questions}
+
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{graphicx}
+
+\begin{document}
+\date{}
+\maketitle
+
+
+\noindent{\textit{Question 8.1:}}
+\newline
+Below is the code example from the book for simulating two-species dynamics, updated so that results are stored in a matrix and plotted.
+
+Which of the parameters in this code are responsible for controlling the strength of between-species (i.e. interspecific) interactions, vs. controlling the effects of each species on their own growth (i.e. intraspecific interactions)? What kind of interaction is being modeled in this example?
+
+\begin{verbatim}
+# set up parameters
+N1=.01; N2=.01;
+r1=0.5; r2=0.8;
+# interaction parameters
+s11=-0.08; s12=-0.03; s21=-0.09; s22=-0.06;
+
+t=0; dt=.0001; tmax=75;      # set up time steps and maximum time
+step=0;                      # a counter for saving dynamics every 1000 steps
+timevec=seq(0, tmax, length=tmax/(dt*1000)); # vector of time steps
+Nmat=matrix(nrow=length(timevec), ncol=2);  # empty matrix for abundances
+i=1;                         # counter for tracking position in N vector
+
+while(t<tmax) {
+  dN1=(r1+s11*N1+s12*N2)*N1*dt;
+  dN2=(r2+s21*N1+s22*N2)*N2*dt;
+  
+  N1=N1+dN1;
+  if(N1<0) {
+    N1=0;
+  }
+  
+  N2=N2+dN2;
+  if(N2<0) {
+    N2=0;
+  }
+  
+  t=t+dt; step=step+1;
+  if(step==1000) {
+    Nmat[i,1]=N1; # store N1 is column 1
+    Nmat[i,2]=N2; # store N2 is column 2
+    step=0; i=i+1; # reset counter and increment i by 1
+  }
+}
+
+# plot results from Nmat matrix
+matplot(timevec, Nmat, # timevec as x values, Nmat as y values
+        type = "l",  # tell R to make a line plot
+        col = c("red", "blue"), # colors for the two lines
+        lty = 1, # line type (a solid line)
+        xlab = "time", ylab = "abundance") # axis labels
+abline(h=0, lty=3) # add dotted line at abundance = 0
+\end{verbatim}
+
+
+~\newline
+\noindent{\textit{Question 8.2:}}
+\newline
+Try updating the code by changing only the signs of the interspecific interaction parameters (i.e. changing whether they are positive or negative, but not changing their absolute values), in order to test out different kinds of species interactions (e.g. competition, predation, and mutualism). How do these different parameter choices influence the outcomes?
+
+Note that the $s$ and $r$ parameter values here have been carefully chosen to be ``well-behaved'', so the changes will be relatively subtle, and will not exactly match some of the more extreme cases that we will talk about later in the book. We will talk about each of these different types of examples in more detail later.
+
+~\newline
+
+\pagebreak
+\noindent{\textbf{Answers:}}
+
+~\newline
+\textit{Question 8.1:}
+\newline
+The primary controllers of species interaction strengths are the $s$ parameters. Parameters $s11$ and $s22$ control the effects of species 1 and 2 on themselves, respectively. Parameter $s12$ controls the effect on species 1 of species 2. Parameter $s21$ controls the effect of species 2 on species 1.
+
+Since both $s12$ and $s21$ are positive (i.e. both species suppress each other's growth), this means that the model is simulating competition.
+
+~\newline
+\textit{Question 8.2:}
+\newline
+Recall that the interspecific interaction parameters are $s12$ and $s21$. Below are plots for all four possible combinations of positive and negative $s12$ and $s21$ values.
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=\linewidth]{images/ch08_q2.pdf}
+\end{figure}
+
+In these figures, as shown in the legend, the red species is always species 1, and the blue species is always species 2. Note that for the two predation cases, whichever species is the ``prey'' species (i.e. the species for which the interaction is still negative -- so species 1 when $s12<0$, and species 2 when $s21<0$) has lower abundance than in the regular competition example, while the ``predator'' species (i.e. the species for which the interaction is positive -- so species 1 when $s12>0$, and species 2 when $s21>0$) has higher abundance. For the mutualism case, both species have much higher abundance than in the competition example (note that the y axis is different for this example).
+
+~\newline
+
+\end{document}

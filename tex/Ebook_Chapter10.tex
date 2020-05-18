@@ -1,0 +1,176 @@
+\title{Chapter 10 Practice Questions}
+
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{float}
+
+\begin{document}
+\date{}
+\maketitle
+
+This section will be a bit more math-heavy and a bit more complicated than usual. Don't worry if you find some of the individual steps and calculations difficult - much more important is that you get the general idea behind what's going on. For all of the questions in this section, we will be considering the following phase space figure. The parameter values used to generate this figure are: $r_1 = 1.2$, $r_2 = 1.4$, $s_{11} = -1.2$, $s_{22} = -0.8$, $s_{12} = -0.4$, and $s_{21} = -0.7$.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.8\linewidth]{images/ch10_q1.pdf}
+\end{figure}
+
+\noindent{\textit{Question 10.1:}}
+\newline
+What kind of a system is this (i.e. competition, predation, mutualism, etc.)? How do you know? What are the carrying capacities for each species in this system?
+
+~\newline
+\noindent{\textit{Question 10.2:}}
+\newline
+The red and blue lines in this figure are zero net growth isoclines - that is, the blue lines show where $\frac{\mathrm{d}N_1}{\mathrm{d}t} = 0$, and the red lines show where $\frac{\mathrm{d}N_2}{\mathrm{d}t} = 0$. For example, for the blue line along the vertical axis at $N1 = 0$, we know that $\frac{\mathrm{d}N_1}{\mathrm{d}t} = 0$ because:
+
+$$ \frac{\mathrm{d}N_1}{\mathrm{d}t} = N_1(r_1 + s_{11} N_1 + s_{12} N_2) $$
+So, any time $N_1 = 0$, $\frac{\mathrm{d}N_1}{\mathrm{d}t} = 0$ as well. The same is true for the blue line along the axis at $N_2 = 0$, as we know that under these circumstances, $\frac{\mathrm{d}N_2}{\mathrm{d}t} = 0$. These are often called the ``trivial'' isoclines, since they simply tell us that when a species isn't present in a system, its growth rate is zero.
+
+But, how about the other two lines (i.e. the slanted red and blue lines that don't align perfectly with either axis)? What do these lines represent, biologically speaking? What do the points where these lines intercept the horizontal and vertical axes represent?
+
+~\newline
+\noindent{\textit{Question 10.3:}}
+\newline
+Again considering the two slanted red and blue lines in the question above, what are the mathematical formula for these two lines? That is, how can we write these lines in terms of the parameters $r_1$, $r_2$, $s_{11}$, $s_{22}$, $s_{12}$, and $s_{21}$?
+
+Recall that a simple linear equation on a graph such as this can be written $y = mx + b$, where $x$ is the variable on the horizontal axis, $y$ is the variable on the vertical axis, $m$ is the slope of the line (i.e. ``rise" divided by ``run"), and $b$ is the y-intercept. 
+
+~\newline
+\noindent{\textit{Question 10.4:}}
+\newline
+What does the filled in black point, at the intersection of the red and blue slanted lines, represent? What is the value of $N_1$ and $N_2$ at this point, in terms of the model parameters?
+
+~\newline
+\noindent{\textit{Question 10.5:}}
+\newline
+Look at the points and arrows in the figure at the start of this exercise. Each of the points represents an equilibrium. Based on the arrows, which describe the direction of change in each part of phase space, explain qualitatively whether each of these four points is stable, and how we know that. 
+
+~\newline
+
+\noindent{\textit{Question 10.6:}}
+\newline
+Below is a slightly modified version of Program 10.1 in the textbook, updated for the parameter values in the figure at the beginning of this exercise, and with a simple R function that mimics the behavior of the ``Sqrt" function described in the textbook. Recall that for each of the four equilibrium points, there are two Eigenvalues (one labeled ``v" and one ``w"). Run this code, and look at the Eigenvalues. What does this tell us about the stability of this system? Does this align with our visual intuition from the previous question?
+
+\begin{verbatim}
+# Set up parameters
+r1= 1.2; s12=-0.4; s11=-1.2;     # Parameters for species 1.
+r2= 1.4; s21=-0.7; s22=-0.8;     # Parameters for species 2.
+
+# Compute useful sub-formulae.
+p = r1*s22 -r2*s12; q = r2*s11 -r1*s21; 
+a = s12*s21 -s11*s22; b = r1*s22*(s21-s11)+r2*s11*(s12-s22);
+c = -p*q;
+
+# Compute the equilibria.
+x00=0; y00=0; # (at the origin)
+x10=-r1/s11; y10=0; # (on the x-axis)
+x01=0; y01=-r2/s22; # (on the y-axis)
+x11=p/a; y11=q/a; # (at the interior)
+
+# Compute the corresponding
+# four pairs of eigenvalues
+# (real part only).
+v00= r1; w00=r2;     # (at the origin)
+v10=-r1; w10=q/s11;  # (at the x-axis)
+v01=-r2; w01=p/s22;  # (at the y-axis)
+# (at the interior)
+v11=(-b-sqrt(pmax(0, b^2-4*a*c)))/(2*a);
+w11=(-b+sqrt(pmax(0, b^2-4*a*c)))/(2*a);
+\end{verbatim}
+
+\pagebreak
+\noindent{\textbf{Answers:}}
+
+~\newline
+\textit{Question 10.1:}
+\newline
+Because both $s_{21}$ (the effect of species 1 on species 2) and $s_{12}$ (the effect of species 2 on species 1) are less than zero in this case, this is an example of competition.
+
+Recall that in the $r + sN$ framework, we can calculate $K_i$ as $\frac{-r_i}{s_{ii}}$. Thus, we can calculate $K_1 = \frac{-r_1}{s_{11}} = \frac{-1.2}{-1.2} = 1$. Similarly, $K_2 = \frac{-r_2}{s_{22}} = \frac{-1.4}{-0.8} = 1.75$. 
+
+~\newline
+\textit{Question 10.2:}
+\newline
+These two lines represent the population sizes for each species at which they have zero growth rate, given different abundances of their competitors.
+
+For example, for the blue line (which shows points for which the growth rate of species 1 is zero), the point where the blue line intercepts the horizontal axis shows us the equilibrium population size for $N_1$, given that $N_2 = 0$. This is, it tells us the equilibrium population size for $N_1$ growing in monoculture (i.e. when species 2 is absent). Note that this point is exactly equal to $K_1$ -- i.e. $N_1 = 1$. As we move to the left along the blue line, the relationship tells us the effect that various abundances of $N_2$ would have on the equilibrium abundance of $N_1$. Because this is a competitive system, note that we always see a decline in this equilibrium as the abundance of the competitor grows. The point where the blue line intercepts the vertical axis (i.e. at $N_1 = 0$) shows us the critical point at which $N_2$ is so abundant, that $N_1$ cannot grow anymore, and so its equilibrium abundance is simply zero. This tells us that if the abundance of species 2 ever exceeds this quantity, species 2 will be driven extinct.
+
+
+Similarly, the point where the red line intercepts the vertical axis tells us the equilibrium abundance for $N_2$ given $N_1 = 0$, which is the same thing as the carrying capacity $K_2 = 1.75$. The point where the red line intercepts the horizontal axis tells us the point at which $N_1$ has become so common that $N_2$ can no longer grow. Thus, if $N_1$ exceeds this abundance, $N_2$ would be driven extinct.
+
+~\newline
+\textit{Question 10.3:}
+\newline
+Let's think of the $N_2$ as the $y$ variable and $N_1$ as the $x$ variable. In this way, we just need to know the y-intercept and slope for each of our lines.
+
+First, we can begin with the red line, for $\frac{\mathrm{d}N_2}{dt} = 0$. We already know that the point where this line hits the y axis is simply the carrying capacity $K_2 = \frac{-r2}{s_{22}}$. Additionally, we know that the effect of species $1$ on species $2$ is summarized by parameter $s_{21}$ - that is, for each additional unit of $N_1$, the growth rate for $N_2$ declines by $s_{21}$. This, of course, turns out to be the definition of a slope (i.e. ``rise" over ``run"), and so we know that the slope for the red line is simply $s_{21}$. Sticking these pieces of information together, we can rewrite the classic $y = mx +b$ as
+
+$$ N_2 =  \frac{-r2}{s_{22}} + s_{21} N_1$$
+This is the equation for the red line.
+
+The blue line is a bit tricker - since it describes $\frac{\mathrm{d}N_1}{dt} = 0$, we could just write
+
+$$ N_1 =  \frac{-r1}{s_{11}} + s_{12} N_2$$
+but since this formulation tells us the value of $N_1$ as a function of $N_2$, this is basically a function for the value of the $x$ variable in terms of the $y$ variable, which is not very helpful for plotting.
+
+Instead, we need to rewrite the equation to solve for $N_2$ in terms of $N_1$. We can accomplish this with the following simplifications
+$$ N_1 = -r_1/s_{11} - s_{12} N_2 $$ 
+$$ N_1 = -r_1/s_{11} - s_{12} N_2 $$ 
+$$ - N_2 s_{12} = -r_1/s_{11} - N_1 $$ 
+$$ N_2 = -(-r_1/s_{11} - N_1)/s_{12} $$ 
+$$ N_2 = r_1/(s_{11}s_{12}) + N_1 (1/s_{12}) $$
+This final version gives us the equation for the blue line, where $r_1/(s_{11}s_{12})$ is the y intercept, and $1/s_{12}$ is the slope.
+
+~\newline
+\textit{Question 10.4:}
+\newline
+The black filled point represents the two-species equilibrium - that is, the point at which both species have zero growth. To identify the abundances at this point, we start with the two equations for the lines:
+
+$$ N_2 = -r_2/s_{22} + s_{21} N_1 $$
+$$ N_1 = -r_1/s_{11} - s_{12} N_2 $$
+
+Next, we need to re-write the equations so that they both equal the same variable. In our case, since $N_2$ is the y variable, it's probably easiest to rewrite the equation for $N_1$ so that it equals $N_2$. As we did above, this gives us
+
+$$ - s_{12} N_2 = -r_1/s_{11} - N_1 $$
+$$ N_2 = - (-r_1/s_{11} - N_1)/s_{12} $$
+$$ N_2 = r_1/s_{11}/s_{12} + N_1 (1/s_{12}) $$
+
+Now, since both of these equations now equal $N_2$, and we are looking for a point where the two lines intersect (i.e. where they predict the same values) we can simply set the two equations equal to one another, and solve for $N_1$. This yields
+
+$$ -r_2/s_{22} + s_{21} N_1 = r_1/s_{11}/s_{12} + N_1 (1/s_{12}) $$
+$$ s_{21} N_1 - N_1 (1/s_{12}) = r_1/s_{11}/s_{12} + r_2/s_{22} $$
+$$ N_1 (s_{21} - 1/s_{12}) = r_1/s_{11}/s_{12} + r_2/s_{22} $$
+$$ N_1 = (r_1/s_{11}/s_{12} + r_2/s_{22})/(s_{21} - 1/s_{12}) \approx 0.4166667$$
+
+This is a bit complex, but it now gives us the value for $N_1$ at this point totally in terms of parameter values. We can now plug this value into our original equation for $N_1$ above, and get
+
+$$ N_2 = -r_2/s_{22} + s_{21} N_1 $$
+$$ N_2 = -r_2/s_{22} + s_{21} ((r_1/s_{11}/s_{12} + r_2/s_{22})/(s_{21} - 1/s_{12})) $$
+
+This is the value for $N_1$. With a bit more algebra, we can simplify it to the following (I have to admit, I got lazy and plugged it into a computerized symbolic equation solver)
+
+$$ N_2 = (r_1 s_{21} s_{22} + r_2 s_{11})/((s_{11} s_{12} s_{21} - s_{11}) s_{22}) \approx 1.458333$$
+
+In any case, these two equations for $N_1$ and $N_2$ can be used to plot the filled black equilibrium point in the figure.
+
+~\newline
+\textit{Question 10.5:}
+\newline
+If a system can recover following a small perturbation away from an equilibrium point, we say that it is stable. From this definition, we know that the three equilibria marked with open circles are not stable, since there are arrows that point away from them. This means that perturbations that moved abundances away from these points would ultimately lead to long-term changes that drive the system away from the original equilibrium. For example, if we start just above the point at $N_1 = 0, N_2 = 0$, notice that we are quickly pulled up and to the right.
+
+The only exception is the filled in point, where the two slanted lines cross. Here, all of the arrows converge towards the equilibrium, suggesting that if the system is pushed away from this point, the natural dynamics will pull abundances back towards the equilibrium. In other words, the two species in this system can coexist stably.
+
+~\newline
+\textit{Question 10.6:}
+\newline
+For the equilibrium at $N_1 = 0$, $N_2 = 0$, the two Eigenvalues v00 and w00 are equal to $1.2$ and $1.4$, respectively. Both of these are positive, meaning that the equilibrium is not stable. Intuitively, this tells us that no matter which direction we perturb the system away from this point, dynamics will ultimately draw us from the equilibrium, which matches our visual intuition from the figure.
+
+For both the equilibrium on the x-axis (v10 = -1.2, w10 = 0.7), and on the y-axis (v01 = -1.4, w01 = 0.5), only one of the two Eigenvalues is negative, meaning that the points are also not stable. Again, this matches our visual intuition, as it suggests that although the system will recover from perturbations in some directions (e.g. perturbations along the x-axis for v10, or along the y-axis for v11), perturbations in other directions will eventually lead dynamics to pull the system away from the equilibrium (e.g. towards the center of the plot).
+
+For the equilibrium where the two species coexist (v11 $\approx -0.37$, w11 $\approx -1.32$), both values are negative. This means that, no matter what direction the system is pushed in, its dynamics will pull it back towards this equilibrium. Again, this matches our visual intuition from the figure.
+
+~\newline
+
+\end{document}
