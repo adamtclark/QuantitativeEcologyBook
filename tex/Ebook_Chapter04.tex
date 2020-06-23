@@ -184,14 +184,14 @@ c. density-limited growth
 \newline
 Given $\frac{\Delta N}{\Delta t} = 0.2 N + -0.01 N^2$, with $N(t) = 5$, we find $\frac{\Delta N}{\Delta t} = 0.75$.
 \newline
-Since $N(t+1) = N(t) + \frac{\Delta N}{\Delta t}$, we therefore know $N(t+1) = 5 + 0.75 = 5.75$.
+Given $\Delta t = 1$, and since $N(t+1) = N(t) + \frac{\Delta N}{\Delta t}$, we therefore know $N(t+1) = 5 + 0.75 = 5.75$.
 
 ~\newline
 \textit{Question 4.6:}
 \newline
 Given $\frac{\Delta N}{\Delta t}\frac{1}{N} = 0.2 + -0.01 N$, with $N(t) = 5$, we find $\frac{\Delta N}{\Delta t}\frac{1}{N} = 0.15$.
 \newline
-Since $N(t+1) = N(t) + \left( \frac{\Delta N}{\Delta t}\frac{1}{N} \right) N$, we therefore know $N(t+1) = \left(5 + (0.15) 5 \right) = 5 + 0.75 = 5.75$. Note that this is identical to the answer for the previous question, since the $s$ and $r$ values are the same.
+Since $\Delta t = 1$ in this case, we can calculate $N(t+1) = N(t) + \left( \frac{\Delta N}{\Delta t}\frac{1}{N} \right) N$, and we therefore know that $N(t+1) = \left(5 + (0.15) 5 \right) = 5 + 0.75 = 5.75$. Note that this is identical to the answer for the previous question, since the $s$ and $r$ values are the same.
 
 ~\newline
 \textit{Question 4.7:}
@@ -203,7 +203,7 @@ As an example, the annual population growth rate of the United States from 2015 
 ~\newline
 \textit{Question 4.8:}
 \newline
-There are a few ways to solve this problem. First, we can remember the formula from the textbook $K = -r/s = -0.6/-0.15 = 2$.
+There are a few ways to solve this problem. First, we can remember the formula from the textbook $K = -r/s = -0.6/-0.15 = 4$.
 
 Alternatively, we can use the equation for per-individual growth rate to determine when total growth equals zero:
 \begin{align*}
@@ -215,7 +215,7 @@ K &= 4
 
 Note that we could have also solved $K$ using the formula for the population growth rate (since the population growth rate also equals zero when the per-individual growth rate equals zero). However, this might prove to be more difficult, since the population growth rate formula includes a quadratic term.
 
-For any of these solutions, the value $K = 2$ tells us that in the long term, populations with starting abundances $N>0$ will tend to grow towards $N=2$, but will not exceed this number.
+For any of these solutions, the value $K = 4$ tells us that in the long term, populations with starting abundances $N>0$ will tend to grow towards $N=4$, but will not exceed this number.
 
 ~\newline
 \textit{Question 4.9:}
@@ -230,11 +230,11 @@ Alternatively, we can use the equation for per-individual growth rate to determi
 N &= 2
 \end{align*}
 
-In either case, the Allee point at $N = 4$ tells us that population growth rates will be negative for any population size $N\leq4$. Thus, for positive growth, initial population sizes must be larger than $4$.
+In either case, the Allee point at $N = 2$ tells us that population growth rates will be negative for any population size $N\leq2$. Thus, for positive growth, initial population sizes must be larger than $2$.
 
 ~\newline
 \textit{Question 4.10:}
 \newline
-Following from the solutions above, we know that $K$ for the Logistic growth phase is $4$. Thus, the population cannot maintain a stable population size greater than this. Similarly, we know that the Allee point for the Orthologistic growth phase is 2. Thus, the minimum viable population size (below which the population will decline towards extinction) is $2$.
+Following from the solutions above, we know that $K$ for the Logistic growth phase is $4$. Thus, the population cannot maintain a stable population size greater than this. Similarly, we know that the Allee point for the Orthologistic growth phase is $2$. Thus, the minimum viable population size (below which the population will decline towards extinction) is $2$.
 
 \end{document}
