@@ -1,0 +1,146 @@
+\title{Chapter 11 Practice Questions}
+
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{float}
+
+\begin{document}
+\date{}
+\maketitle
+
+\noindent{\textit{Question 11.1:}}
+\newline
+Let's begin with the biomass-leaf litter system discussed in the chapter:
+
+$$ N_1(t+1) = r N_1(t)(1-N_2(t)) $$
+$$ N_2(t+1) = N_1(t) + p N_2(t) $$
+
+Just like in a continuous-time system, we can use these equations to calculate equilibrium values for $N_1$ and $N_2$. But, unlike in continuous-time where we obtained this equilibrium by setting $\frac{\mathrm{d}N}{\mathrm{d}t} = 0$, here, we need to do something else. Describe, in words, how we could go about finding this equilibrium.
+
+~\newline
+\noindent{\textit{Question 11.2:}}
+\newline
+Now, use this process to calculate the equilibrium for these two equations. Hint -- it might be a good idea to double-check the answer to question 11.1 before proceeding.
+
+~\newline
+\noindent{\textit{Question 11.3:}}
+\newline
+You can use the following code to simulate and plot dynames for this system over 1000 time steps, with paramter values $r = 2$ and $p = 0.5$:
+
+\begin{verbatim}
+# functions for n1(t+1) and n2(t*1)
+f1 = function(r, N1, N2) {r*N1*(1-N2)}
+f2 = function(p, N1, N2) {N1 + p*N2}
+
+# set r and p
+r = 2
+p = 0.5
+
+# make empty vectors for storing results
+n1 = rep(NA, 1000)
+n2 = rep(NA, 1000)
+
+# set starting abundances
+n1[1] = ???
+n2[1] = ???
+
+# simulate for 1000 time steps
+for(i in 1:999) {
+  n1[i+1] = f1(r, n1[i], n2[i])
+  n2[i+1] = f2(p, n1[i], n2[i])
+}
+
+# plot output
+matplot(1:1000, cbind(n1,n2), type = "l",
+        xlab="time", ylab="abundance")
+legend("topright", c("n1", "n2"), col=1:2,
+		lty=1:2, bty = "n")
+\end{verbatim}
+
+Replace the two "???" signs above with your solutions for the equilibrial values for $N_1$ and $N_2$. What behavior do you expect to see when you simulate these dynames? What behavior do you find? Again, you may want to double-check your answers from the previous question before running this code.
+
+~\newline
+\noindent{\textit{Question 11.4:}}
+\newline
+Now, try running the same code again, but with different starting values -- $N_1(t = 1) = 0.1$, and $N_2(t = 1) = 0$. What do we expect to find now? Should the system eventually converge to the equilibrial values, or not? Now try running the simulation -- what do you find? Why does this happen?
+
+~\newline
+\noindent{\textit{Question 11.5:}}
+\newline
+Finally, what can we do to make the system flatten out over time to the equilibrial values? Try making some changes to the script above, and see if your idea works.
+
+~\newline
+
+\pagebreak
+\noindent{\textbf{Answers:}}
+
+~\newline
+\textit{Question 11.1:}
+\newline
+In this case, we need to set $N_1(t+1) = N_1(t)$, and $N_2(t+1) = N_2(t)$. This procedure works because, at equilibrium, we expect the values to stop changing over time -- meaning that the value this time step should equal the value next time step.
+
+~\newline
+\textit{Question 11.2:}
+\newline
+Because $N_1$ and $N_2$ appear in both equations, finding the equilibrium here will be a bit tricker than it was in single-species systems. A good place to start is to use one equation to solve for $N_2$ as a function of $N_1$, and then substitute this value into the other equation. It doesn't really matter which equation we choose, but in this case, we'll try using the equation for $N_2$ to solve for $N_1$. To do so, we first set $N_2(t+1) = N_2(t) = N_2$, and $N_1(t+1) = N_1(t) = N_1$, which yields
+
+$$ N_2 = N_1 + p N_2 $$
+$$ N_2 - p N_2 = N_1 $$
+$$ N_2(1 - p) = N_1 $$
+$$ N_2 = N_1/(1 - p) $$
+
+Now, we can substitute this into the equation for $N_1$, which yields
+
+$$ N_1 = r N_1(1-N_2) $$
+$$ N_1 = r N_1(1-N_1/(1 - p)) $$
+$$ N_1 = r N_1-N_1^2/(1 - p) $$
+
+Diving both sides by $N_1$ gives
+
+$$ 1 = r - r N_1/(1 - p) $$
+$$ 1 + r N_1/(1 - p) = r $$
+$$ r N_1/(1 - p) = r - 1 $$
+$$ N_1 = (r - 1)(1 - p)/r $$
+$$ N_1 = (1 - 1/r)(1 - p) $$
+
+Finally, we can plug this value for $N_1$ back into the formula for $N_2$, which yields
+$$ N_2 = N_1/(1 - p) $$
+$$ N_2 = (1 - 1/r)(1 - p)/(1 - p) $$
+$$ N_2 = (1 - 1/r) $$
+
+~\newline
+\textit{Question 11.3:}
+\newline
+Since we expect the system to be stationary at equilibrium, we would expect to see two flat lines -- i.e. no changes in $N_1$ or $N_2$ over time. Indeed, if we input the right equilibrium values, we get the following plot:
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.8\linewidth]{images/ch11_q3.pdf}
+\end{figure}
+
+~\newline
+\textit{Question 11.4:}
+\newline
+In this case, the system never seems to go to equilibrium -- it just keeps oscillating forever. The reason for this is that the growth rate is so fast, that the system ends up overshooting the equilibrium alltogether. And, for the growth rate that we chose here, these over-shootings keep on happening over and over again, so that we never flatten out to a fixed value. This is very similar to the limit cycles that we saw for single species systems.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.8\linewidth]{images/ch11_q4.pdf}
+\end{figure}
+
+\newpage
+
+~\newline
+\textit{Question 11.5:}
+\newline
+There are probably several different answers that would work here. But, the simplest is to just decrease $r$ to a smaller growth rate -- this will minimize the extent to which the system overshoots equilibrium. For example, if we set $r = 1.5$, we find:
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.8\linewidth]{images/ch11_q5.pdf}
+\end{figure}
+
+~\newline
+
+\end{document}
